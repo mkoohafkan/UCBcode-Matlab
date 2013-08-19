@@ -14,7 +14,7 @@ realareas = zeros(length(imgnames), 1) ;
 
 %% get leaf areas
 for n = 1:length(imgnames)
-    realareas(n, 1) = getleafarea(imgfolder, imgnames{n, 1}) ;
+    realareas(n, 1) = getleafarea(imgfolder, imgnames{n, 1}, false) ;
 end
 % convert to cm
 realareas = 6.4516*realareas ;

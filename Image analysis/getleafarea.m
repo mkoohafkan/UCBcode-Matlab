@@ -1,4 +1,4 @@
-function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname)
+function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname, writeimages)
     % assumes scale is in lower right corner, leaf is on top half of image
     original=imread([imgfolder '/' imgname]) ;
     leaf = original(10:end-500, 10:end-10, :, :) ;
@@ -11,9 +11,11 @@ function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname)
     % processing leaf
     leaf = imopen(leaf, strel('disk', 1)) ;
     leaf = imclose(leaf, strel('disk', 3)) ;
+    if writeimages
     % write processed images to file for verification
-    imwrite(scale, [imgfolder '/processed_scale-' imgname]) ;
-    imwrite(leaf, [imgfolder '/processed_leaf-' imgname]) ;
+        imwrite(scale, [imgfolder '/processed_scale-' imgname]) ;
+        imwrite(leaf, [imgfolder '/processed_leaf-' imgname]) ;
+    end
     % calculate area
     % assumes scale is 1-in square
     leafarea = bwarea(imcomplement(leaf)) ;
