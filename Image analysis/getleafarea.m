@@ -13,8 +13,8 @@ function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname, wri
     leaf = imclose(leaf, strel('disk', 3)) ;
     if writeimages
     % write processed images to file for verification
-        imwrite(scale, [imgfolder '/processed_scale-' imgname]) ;
-        imwrite(leaf, [imgfolder '/processed_leaf-' imgname]) ;
+        imwrite(scale, [imgfolder '/_processed/processed_scale-' imgname]) ;
+        imwrite(leaf, [imgfolder '/_processed/processed_leaf-' imgname]) ;
     end
     % calculate area
     % assumes scale is 1-in square
