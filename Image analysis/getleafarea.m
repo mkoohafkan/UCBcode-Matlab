@@ -1,7 +1,7 @@
 function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname, writeimages)
     % assumes scale is in lower right corner, leaf is on top half of image
     original=imread([imgfolder '/' imgname]) ;
-    leaf = original(10:end-500, 10:end-10, :, :) ;
+    leaf = original(10:end-500, 10:end-10, :) ;
     scale = original(end-500:end-10, end-500:end-10, :) ;
     % processing scale
     scale = imclose(scale, strel('square', 2)) ;
@@ -18,7 +18,7 @@ function [realarea, leaf, scale, original] = getleafarea(imgfolder, imgname, wri
     end
     % calculate area
     % assumes scale is 1-in square
-    leafarea = bwarea(imcomplement(leaf)) ;
-    scalearea = bwarea(imcomplement(scale)) ;
+    leafarea = sum(sum(imcomplement(leaf(:,:,1)))) ;
+    scalearea = sum(sum(imcomplement(scale(:,:,1)))) ;
     realarea = leafarea/scalearea ; % in inches
 end
