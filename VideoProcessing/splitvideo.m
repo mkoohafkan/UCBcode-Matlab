@@ -1,6 +1,6 @@
 function nframes = splitvideo(videoname, imgformat)
 
-if nargs < 2
+if nargin < 2
    imgformat = 'tiff' ;
 end
 % create folder to house exported frames
